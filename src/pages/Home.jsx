@@ -25,10 +25,10 @@ function Home() {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-green-100">
+    <div className="h-screen flex flex-col items-center  bg-green-100">
       {user ? (
         <>
-          <h1 className="text-2xl font-bold">Welcome, {user.name}</h1>
+          <h1 className="text-2xl font-bold mt-30">Welcome, {user.name}</h1>
 
           {/* logout */}
 

@@ -35,7 +35,7 @@ export class AuthService{
                     if (error.code === 409) {
                         throw new Error("User with this email already exists. Please login.");
                     }
-                    await this.account.deleteSessions(); 
+                    await this.account.deleteSession(); 
                 }
             }else{
                 return userAccount;
@@ -70,7 +70,7 @@ export class AuthService{
 
     async logout(){ 
         try {
-            await this.account.deleteSessions()
+            await this.account.deleteSession()
         } catch (error) {
             console.log("Appwrite Service :: logout :: error", error);
         }

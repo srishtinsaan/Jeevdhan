@@ -9,10 +9,11 @@ function Landing() {
     }
 
   return (
-    <div className='w-full h-full  flex justify-center items-center'>
+    <div className='w-full h-full  flex flex-col  items-center'>
       <Navbar/>
-      <button className='border' onClick={() => handleclick()}>Get Started</button>
-
+      <div className="mt-50">
+        <button className='border' onClick={() => handleclick()}>Get Started</button>
+      </div>
 
     </div>
   )
