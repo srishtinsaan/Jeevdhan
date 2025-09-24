@@ -9,7 +9,7 @@ function Landing() {
     }
 
   return (
-    <div className='w-full h-full  flex flex-col  items-center'>
+    <div className='w-full h-full  flex flex-col  items-center bg-green-500'>
       <Navbar/>
       <div className="mt-50">
         <button className='border' onClick={() => handleclick()}>Get Started</button>

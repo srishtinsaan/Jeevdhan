@@ -5,6 +5,10 @@ import Home from "./pages/Home"
 import Layout from './pages/Layout'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alerts from './pages/Alerts'
+import Modules from './pages/Modules'
+import Settings from './pages/Settings'
+import RiskAssessment from './pages/Assessments'
+import Help from './pages/Help'
 
 function App() {
   return (
@@ -17,6 +21,10 @@ function App() {
         <Route path="/home" element={<Layout/>}>
           <Route index element={<Home />} />
           <Route path='alerts' element={<Alerts/>}/>
+          <Route path='modules' element={<Modules/>}/>
+          <Route path='assessments' element={<RiskAssessment/>}/>
+          <Route path='settings' element={<Settings/>}/>
+          <Route path='help' element={<Help/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

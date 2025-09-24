@@ -52,6 +52,10 @@ export class AuthService{
 
     async login({email, password}){
         try{
+            const sessions = await this.account.listSessions()
+            if(sessions.sessions.length){
+                await this.account.deleteSessions()
+            }
             return await this.account.createEmailPasswordSession(email, password)
         }catch(error){
             throw error;
@@ -70,7 +74,7 @@ export class AuthService{
 
     async logout(){ 
         try {
-            await this.account.deleteSession()
+            await this.account.deleteSession('current')
         } catch (error) {
             console.log("Appwrite Service :: logout :: error", error);
         }
@@ -80,3 +84,4 @@ export class AuthService{
 const authService  = new AuthService(); //object created
 
 export default authService // object exported taaki directly obj se kuch bhi features use kar sake.
+
