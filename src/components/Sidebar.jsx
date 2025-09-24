@@ -35,7 +35,7 @@ export default function Sidebar() {
       </div>
 
       <nav className="mt-6 flex flex-col gap-2">
-        <NavLink to="/home" className={({ isActive }) => isActive ? "bg-green-900 p-2 rounded" : "p-2 rounded"}>Home</NavLink>
+        <NavLink to="/home" end className={({ isActive }) => isActive ? "bg-green-900 p-2 rounded" : "p-2 rounded bg-green-700"}>Home</NavLink>
         <NavLink to="/home/alerts" className={({ isActive }) => isActive ? "bg-green-900 p-2 rounded" : "p-2 rounded"}>Alerts</NavLink>
         <NavLink to="/home/modules" className={({ isActive }) => isActive ? "bg-green-900 p-2 rounded" : "p-2 rounded"}>Modules</NavLink>
         <NavLink to="/home/assessments" className={({ isActive }) => isActive ? "bg-green-900 p-2 rounded" : "p-2 rounded"}>Assessments</NavLink>

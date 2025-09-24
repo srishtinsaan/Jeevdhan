@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Alerts from './pages/Alerts'
 import Modules from './pages/Modules'
 import Settings from './pages/Settings'
-import RiskAssessment from './pages/Assessments'
+import RiskAssessment from './pages/RiskAssessment'
 import Help from './pages/Help'
 
 function App() {

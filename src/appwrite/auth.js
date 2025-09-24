@@ -28,14 +28,14 @@ export class AuthService{
                 
             if(userAccount){
                 try { 
-                    return this.login({email, password})
+                    return await this.login({email, password})
                     
                 } catch (error) {
                     // if email already exists
                     if (error.code === 409) {
                         throw new Error("User with this email already exists. Please login.");
                     }
-                    await this.account.deleteSession(); 
+                    await this.account.deleteSession('current'); 
                 }
             }else{
                 return userAccount;
@@ -52,11 +52,13 @@ export class AuthService{
 
     async login({email, password}){
         try{
-            const sessions = await this.account.listSessions()
-            if(sessions.sessions.length){
-                await this.account.deleteSessions()
-            }
-            return await this.account.createEmailPasswordSession(email, password)
+            // const sessions = await this.account.listSessions()
+            // if(sessions.sessions.length){
+            //     await this.account.deleteSessions()
+            // }
+            // return await this.account.createEmailPasswordSession(email, password)
+            await this.account.deleteSession('current').catch(() => {});
+            return await this.account.createEmailPasswordSession(email, password);
         }catch(error){
             throw error;
         }
@@ -69,12 +71,12 @@ export class AuthService{
             console.log("Appwrite Service :: getCurrentUser :: error", error);
         }
 
-        return null; // agar acc na mile ya koi error aa jae
+        return null; // agar acc na mile ya koi error aa jae    
     }
 
     async logout(){ 
         try {
-            await this.account.deleteSession('current')
+            await this.account.deleteSessions()
         } catch (error) {
             console.log("Appwrite Service :: logout :: error", error);
         }

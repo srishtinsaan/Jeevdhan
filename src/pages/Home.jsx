@@ -25,19 +25,12 @@ function Home() {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center  bg-green-100">
+    <div className="h-screen flex flex-col bg-green-100">
       {user ? (
         <>
           <h1 className="text-2xl font-bold mt-30">Welcome, {user.name}</h1>
 
-          {/* logout */}
-
-          <button
-            onClick={handleLogout}
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg"
-          >
-            Logout
-          </button>
+          
         </>
       ) : (
         <Loading/>
