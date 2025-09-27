@@ -10,6 +10,10 @@ function Auth() {
 
   const navigate = useNavigate();
 
+  const guestlogin = () => {
+    navigate("/home")
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -81,6 +85,7 @@ function Auth() {
           >
             {isLogin ? "Sign Up" : "Login"}
           </button>
+          <button className="ml-5 bg-gray-100 border " onClick={() => guestlogin()}>Guest</button>
         </p>
       </div>
     </div>

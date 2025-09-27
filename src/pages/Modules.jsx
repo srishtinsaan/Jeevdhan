@@ -1,87 +1,79 @@
-import React from 'react'
+import { BookOpen, CheckCircle, Clock } from "lucide-react";
 
-function Modules() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default Modules
-
-const trainingModules = [
-    { id: "t1", title: "Intro to Biosecurity", type: "article", summary: "Practical steps to reduce disease risk on small farms." },
-    { id: "t2", title: "Disinfection & Waste", type: "video", summary: "How to disinfect and manage waste safely." },
-    { id: "t3", title: "Visitor & Movement Control", type: "article", summary: "Simple visitor protocols and record-keeping." },
+export default function Modules() {
+  const modules = [
+    { 
+      title: "Biosecurity Basics", 
+      desc: "Introduction to livestock farm safety.", 
+      progress: 100, 
+      status: "completed" 
+    },
+    { 
+      title: "Disease Prevention", 
+      desc: "Learn about common farm diseases and how to prevent them.", 
+      progress: 60, 
+      status: "in-progress" 
+    },
+    { 
+      title: "Hygiene Practices", 
+      desc: "Daily hygiene routines to keep animals safe.", 
+      progress: 0, 
+      status: "not-started" 
+    },
   ];
 
-  function TrainingView() {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        <h2 className="text-2xl font-semibold mb-4">Training Modules</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {trainingModules.map(m => (
-            <div key={m.id} className="bg-white/5 p-4 rounded">
-              <div className="font-semibold">{m.title}</div>
-              <div className="text-sm text-gray-300 mt-2">{m.summary}</div>
-              <div className="mt-4 flex gap-2">
-                <button onClick={()=>markTraining(m.id)} className="px-3 py-1 bg-red-600 rounded">Mark complete</button>
-                <button onClick={()=>setMessage("Preview not implemented in MVP")} className="px-3 py-1 border border-white/10 rounded">Preview</button>
-              </div>
-              <div className="text-xs mt-2 text-gray-300">Status: {store.trainingProgress[m.id] ? "Completed" : "Not completed"}</div>
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-6 text-green-700">📘 Training Modules</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {modules.map((m, i) => (
+          <div 
+            key={i} 
+            className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-lg flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-green-600" /> {m.title}
+              </h3>
+              {m.status === "completed" && (
+                <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full flex items-center gap-1">
+                  <CheckCircle className="w-4 h-4" /> Completed
+                </span>
+              )}
+              {m.status === "in-progress" && (
+                <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full flex items-center gap-1">
+                  <Clock className="w-4 h-4" /> In Progress
+                </span>
+              )}
+              {m.status === "not-started" && (
+                <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                  Not Started
+                </span>
+              )}
             </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
-  function ChecklistView() {
-    const farmId = "default_farm";
-    const initial = store.checklists[farmId]?.items || [
-      { key: "isolate_sick", label: "Isolate sick animals", done: false },
-      { key: "disinfect_daily", label: "Daily disinfection of key areas", done: false },
-      { key: "visitor_log", label: "Maintain visitor log and controls", done: false },
-      { key: "feed_verification", label: "Verify feed suppliers", done: false },
-    ];
-    const [items, setItems] = useState(initial);
+            <p className="text-sm text-gray-600 mt-2">{m.desc}</p>
 
-    useEffect(()=> {
-      setItems(store.checklists[farmId]?.items || initial);
-      // eslint-disable-next-line
-    }, [store.checklists]);
-
-    const toggle = (idx) => {
-      const copy = items.map((it, i) => i === idx ? { ...it, done: !it.done } : it);
-      setItems(copy);
-    };
-    return (
-      <div className="max-w-3xl mx-auto p-6">
-        <h2 className="text-2xl font-semibold mb-4">Compliance Checklist</h2>
-        <p className="text-sm text-gray-300 mb-4">A simple checklist you can update as you implement tasks.</p>
-
-        <div className="bg-white/5 p-4 rounded space-y-3">
-          {items.map((it, i)=>(
-            <div key={it.key} className="flex items-center justify-between gap-3">
-              <div>
-                <div className="font-medium">{it.label}</div>
-                <div className="text-xs text-gray-300">Status: {it.done ? "Done" : "Pending"}</div>
-              </div>
-              <div>
-                <button onClick={()=>toggle(i)} className={`px-3 py-1 rounded ${it.done ? "bg-green-600" : "bg-white/5"}`}>{it.done ? "Done" : "Mark"}</button>
-              </div>
+            {/* Progress bar */}
+            <div className="w-full bg-gray-200 h-2 rounded-full mt-3">
+              <div 
+                className={`h-2 rounded-full ${m.progress === 100 ? "bg-green-600" : "bg-yellow-500"}`} 
+                style={{ width: `${m.progress}%` }}
+              ></div>
             </div>
-          ))}
-          <div className="flex justify-end gap-2">
-            <button onClick={()=>saveChecklist(farmId, items)} className="px-3 py-2 bg-red-600 rounded">Save</button>
-            <button onClick={()=>{ setItems(initial); }} className="px-3 py-2 border border-white/10 rounded">Reset</button>
+
+            {/* Action buttons */}
+            <button 
+              className={`mt-4 px-4 py-2 rounded text-white w-full ${
+                m.status === "completed" ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
+              }`}
+              disabled={m.status === "completed"}
+            >
+              {m.status === "completed" ? "Completed" : "Start Module"}
+            </button>
           </div>
-        </div>
-
-        <div className="mt-6">
-          <div className="text-sm text-gray-300">Last saved: {store.checklists[farmId]?.updatedAt ? new Date(store.checklists[farmId].updatedAt).toLocaleString() : "Never"}</div>
-        </div>
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
+}
