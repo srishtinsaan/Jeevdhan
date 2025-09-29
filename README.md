@@ -54,7 +54,7 @@ A digital biosecurity platform for small and medium-scale livestock farms. Provi
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/jeevdhan.git
+git clone https://github.com/srishtinsaan/jeevdhan.git
 ```
 
 2. Navigate into the project directory:
